@@ -18,15 +18,26 @@
 
   --green-1: #8BC34A;
   --green-2: #558B2F;
+
+  --theme-transition: 0.2s;
 }
 
 body {
+  background-color: #e6e6e6;
+  transition: var(--theme-transition);
+}
+
+[data-theme="dark"] body {
   background-color: #121212;
 }
 
 h1, h2, h3, h4, h5, h6, p, span {
+  color: #000;
+  transition: 0.2s;
+}
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] p, [data-theme="dark"] span {
   color: #FFF;
-  /* opacity: 0.80; */
 }
 
 h1.disabled, h2.disabled, h3.disabled, h4.disabled, h5.disabled, h6.disabled, p.disabled, span.disabled {
