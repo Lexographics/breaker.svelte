@@ -4,22 +4,27 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width" />
+
+		<script>
+			if (sessionStorage.getItem('theme-preference') === 'dark')
+				document.documentElement.setAttribute("data-theme", 'dark');
+		</script>
 		
-		<link href="./_app/immutable/assets/2.934de264.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.78bc9d7f.js">
+		<link href="./_app/immutable/assets/2.2b9ea0a0.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.231594dc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.e108d1fd.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.a42a1725.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.387569d0.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.656d7007.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.de1ce95e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.509b35b2.js">
 		<link rel="modulepreload" href="./_app/immutable/nodes/0.ab0cbb36.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.44bffb73.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.d10adbb4.js">
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">  <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;" data-svelte-h="svelte-1fc8t9">breaker.svelte widgets</h1> <br> <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;" data-svelte-h="svelte-ruzg6i">buttons</h1> <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-evenly; width: 50%; margin-left: 25%"><a class="type-primary svelte-viy3h8" href="#">Primary</a>  <a class="type-warning svelte-viy3h8" href="#">Warning</a>  <a class="type-error svelte-viy3h8" href="#">Error</a>  <a class="type-success svelte-viy3h8" href="#">Success</a> </div> 
+		<div style="display: contents">  <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;" data-svelte-h="svelte-1fc8t9">breaker.svelte widgets</h1> <br> <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;" data-svelte-h="svelte-ruzg6i">buttons</h1> <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;" id="buttons"><div style="padding: 1rem;"><a class="type-primary svelte-viy3h8" href="#" draggable="false">Primary</a> </div> <div style="padding: 1rem;"><a class="type-warning svelte-viy3h8" href="#" draggable="false">Warning</a> </div> <div style="padding: 1rem;"><a class="type-error svelte-viy3h8" href="#" draggable="false">Error</a> </div> <div style="padding: 1rem;"><a class="type-success svelte-viy3h8" href="#" draggable="false">Success</a> </div></div> <br> <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;" data-svelte-h="svelte-1cb2yvt">switch</h1> <div style="display: flex; justify-content: center;"><div class="checkbox blur svelte-f5bbqe"><label class="switch svelte-f5bbqe" for="checkbox"><input  type="checkbox" id="checkbox" class="svelte-f5bbqe"> <div style="--bg-color: #512DA8" class="slider round svelte-f5bbqe"></div></label> <p>Dark Mode</p> </div></div> 
 			
 			<script>
 				{
-					__sveltekit_1nnqsa9 = {
+					__sveltekit_16ndqij = {
 						assets: "/breaker.svelte",
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
@@ -30,8 +35,8 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.78bc9d7f.js"),
-						import("./_app/immutable/entry/app.387569d0.js")
+						import("./_app/immutable/entry/start.231594dc.js"),
+						import("./_app/immutable/entry/app.de1ce95e.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
