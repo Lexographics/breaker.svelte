@@ -12,7 +12,7 @@
     buttons
 </h1>
 
-<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-evenly; width: 50%; margin-left: 25%">
+<div style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;">
     <Button type="primary" href="#">Primary</Button>
     <Button type="warning" href="#">Warning</Button>
     <Button type="error" href="#">Error</Button>

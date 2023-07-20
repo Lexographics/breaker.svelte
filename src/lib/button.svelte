@@ -26,7 +26,7 @@
   });
 </script>
 
-<a class="type-{type}" on:click={onclick} bind:this={element} {href}>
+<a class="type-{type}" on:click={onclick} bind:this={element} {href} draggable="false">
   <slot />
 </a>
 
