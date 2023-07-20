@@ -1,13 +1,15 @@
 <script>
   import { onMount } from "svelte";
+  import './global.css'
 
   export let href = "#";
   export let onclick = function() {}
   export let type = "primary";
 
+
   let element = null;
   onMount(async () => {
-    element.addEventListener("click", function (e) {
+    element?.addEventListener("click", function (e) {
       let x = e.clientX - e.target.offsetLeft;
       let y = e.clientY - e.target.offsetTop;
 

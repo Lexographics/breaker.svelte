@@ -1,6 +1,6 @@
 <script>
-    import Button from "../widgets/button.svelte";
-
+    import { Button } from "$lib/lib";
+    
 </script>
 
 <h1 style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;">
