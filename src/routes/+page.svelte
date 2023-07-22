@@ -1,8 +1,14 @@
 <script>
     import { writable } from "svelte/store";
     import { browser } from "$app/environment";
-    import { Button, Switch, TextInput, CheckBox } from "$lib/lib";
-    import { notLessThan, notEmpty, notGreaterThan, doesntMatchRegex, isChecked } from "$lib/forms/lib";
+    import { Button, Switch, TextInput, CheckBox, Container } from "$lib/lib";
+    import {
+        notLessThan,
+        notEmpty,
+        notGreaterThan,
+        doesntMatchRegex,
+        isChecked,
+    } from "$lib/forms/lib";
 
     function toggleDarkMode(e) {
         if (e.target.checked) {
@@ -27,7 +33,13 @@
         let fields = {
             Name: {
                 err: nameError,
-                func: [notEmpty, doesntMatchRegex(/^bobby fischer$/i, "Name cannot be Bobby Fischer")],
+                func: [
+                    notEmpty,
+                    doesntMatchRegex(
+                        /^bobby fischer$/i,
+                        "Name cannot be Bobby Fischer"
+                    ),
+                ],
             },
             Password: {
                 err: passwordError,
@@ -35,8 +47,8 @@
             },
             Check: {
                 err: checkboxError,
-                func: [isChecked]
-            }
+                func: [isChecked],
+            },
         };
 
         let valid = true;
@@ -58,7 +70,7 @@
                 if (["checkbox"].includes(input.type)) {
                     err = func(name, input.checked);
                 }
-                
+
                 data.err.set(err);
 
                 if (err !== "") {
@@ -82,78 +94,86 @@
     }
 </script>
 
-<h1
-    style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;"
->
-    breaker.svelte widgets
-</h1>
+<h1 class="header-text">breaker.svelte widgets</h1>
 <br />
 
-<h1
-    style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;"
->
-    buttons
-</h1>
+<h1 class="header-text">buttons</h1>
 
-<div
-    style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;"
-    id="buttons"
->
-    <div style="padding: 1rem;">
-        <Button type="primary" value="Primary" />
-        <Button transparent type="primary" value="Primary" />
+<Container>
+    <div
+        style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;"
+        id="buttons"
+    >
+        <div style="padding: 1rem;">
+            <Button type="primary" value="Primary" />
+            <Button transparent type="primary" value="Primary" />
+        </div>
+        <div style="padding: 1rem;">
+            <Button type="warning" value="Warning" />
+            <Button transparent type="warning" value="Warning" />
+        </div>
+        <div style="padding: 1rem;">
+            <Button type="error" value="Error" />
+            <Button transparent type="error" value="Error" />
+        </div>
+        <div style="padding: 1rem;">
+            <Button type="success" value="Success" />
+            <Button transparent type="success" value="Success" />
+        </div>
     </div>
-    <div style="padding: 1rem;">
-        <Button type="warning" value="Warning" />
-        <Button transparent type="warning" value="Warning" />
-    </div>
-    <div style="padding: 1rem;">
-        <Button type="error" value="Error" />
-        <Button transparent type="error" value="Error" />
-    </div>
-    <div style="padding: 1rem;">
-        <Button type="success" value="Success" />
-        <Button transparent type="success" value="Success" />
-    </div>
-</div>
+</Container>
 
 <br />
-<h1
-    style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;"
->
-    switch
-</h1>
+<h1 class="header-text">switch</h1>
 <div style="display: flex; justify-content: center;">
     <Switch {checked} onClicked={toggleDarkMode}>Dark Mode</Switch>
 </div>
 
 <br />
-<h1
-    style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;"
->
-    forms
-</h1>
+<h1 class="header-text">forms</h1>
 
 <div style="width: 50%; margin-left: 25%;">
-    <form action="/breaker.svelte" method="get">
-        <span id="error" />
-        <TextInput
-            errorText={$nameError}
-            {onChange}
-            name="name"
-            placeholder="John Doe"
-            type="tel">Username</TextInput
-        >
-        <TextInput
-            errorText={$passwordError}
-            {onChange}
-            name="password"
-            placeholder="********"
-            type="password">Password</TextInput
-        >
+    <Container radius="1rem">
+        <form action="/breaker.svelte" method="get">
+            <span id="error" />
+            <TextInput
+                errorText={$nameError}
+                {onChange}
+                name="name"
+                placeholder="John Doe"
+                type="tel">Username</TextInput
+            >
+            <TextInput
+                errorText={$passwordError}
+                {onChange}
+                name="password"
+                placeholder="********"
+                type="password">Password</TextInput
+            >
 
-        <CheckBox errorText={$checkboxError} value="You must check this" name="check" id="check" onChange={onChange}/>
+            <CheckBox
+                errorText={$checkboxError}
+                value="You must check this"
+                name="check"
+                id="check"
+                {onChange}
+            />
 
-        <Button type="success" submit value="Submit" onclick={submit} />
-    </form>
+            <Button type="success" submit value="Submit" onclick={submit} />
+        </form>
+    </Container>
 </div>
+
+<br /><br />
+<Container height="300px" />
+
+<style>
+    .header-text {
+        text-align: center;
+        text-transform: uppercase;
+        margin: 2rem;
+        color: #b020c9;
+        font-size: 3rem;
+        font-weight: 500;
+    }
+</style>
