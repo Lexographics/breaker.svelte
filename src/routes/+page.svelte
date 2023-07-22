@@ -1,7 +1,8 @@
 <script>
-    import { writable } from 'svelte/store';
+    import { writable } from "svelte/store";
     import { browser } from "$app/environment";
     import { Button, Switch, TextInput } from "$lib/lib";
+    import { notLessThan, notEmpty, notGreaterThan, doesntMatchRegex } from "$lib/forms/lib";
 
     function toggleDarkMode(e) {
         if (e.target.checked) {
@@ -18,62 +19,41 @@
         checked = sessionStorage.getItem("theme-preference") === "dark";
     }
 
-    function checkName(name) {
-        if(!name) {
-            return "Name cannot be empty"
-        }
-        if(name.toLowerCase() === "bobby fischer") {
-            return "Password cannot be Bobby Fischer"
-        }
-
-        return "";
-    }
-    function checkPassword(password) {
-        if(!password) {
-            return "Password cannot be empty"
-        }
-
-        if(password.length < 8) {
-            return "Password must be greater than 8 characters"
-        }
-
-        return "";
-    }
-
     let nameError = writable("");
     let passwordError = writable("");
 
     function check(e) {
         let fields = {
-            name: {
+            Name: {
                 err: nameError,
-                func: checkName
+                func: [notEmpty, doesntMatchRegex(/^bobby fischer$/i, "Name cannot be Bobby Fischer")],
             },
-            password: {
+            Password: {
                 err: passwordError,
-                func: checkPassword
-            }
-        }
+                func: [notEmpty, notLessThan(8), notGreaterThan(10)],
+            },
+        };
 
         let valid = true;
 
-        for(let [name, data] of Object.entries(fields)) {
-            let input = e.target.form.elements[name]
-            if(!input) {
+        for (let [name, data] of Object.entries(fields)) {
+            let input = e.target.form.elements[name.toLowerCase()];
+            if (!input) {
                 data.err.set("Element not found");
                 valid = false;
 
                 continue;
             }
-            
-            let err = data.func(input.value);
-            data.err.set(err);
-            if(err !== "") {
-                valid = false;
 
-                continue;
+            for (let func of data.func) {
+                let err = func(name, input.value);
+                data.err.set(err);
+
+                if (err !== "") {
+                    valid = false;
+                    break;
+                }
             }
-
         }
 
         return valid;
@@ -141,11 +121,19 @@
 <div style="width: 50%; margin-left: 25%;">
     <form action="/breaker.svelte" method="get">
         <span id="error" />
-        <TextInput errorText={$nameError} onChange={onChange} name="name" placeholder="John Doe" type="tel"
-            >Username</TextInput
+        <TextInput
+            errorText={$nameError}
+            {onChange}
+            name="name"
+            placeholder="John Doe"
+            type="tel">Username</TextInput
         >
-        <TextInput errorText={$passwordError} onChange={onChange} name="password" placeholder="********" type="password"
-            >Password</TextInput
+        <TextInput
+            errorText={$passwordError}
+            {onChange}
+            name="password"
+            placeholder="********"
+            type="password">Password</TextInput
         >
 
         <Button type="success" submit value="Submit" onclick={submit} />

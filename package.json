@@ -13,6 +13,10 @@
 		".": {
 			"types": "./dist/lib.d.ts",
 			"svelte": "./dist/lib.js"
+		},
+		"./forms": {
+			"types": "./dist/forms/lib.d.ts",
+			"svelte": "./dist/forms/lib.ts"
 		}
 	},
 	"dependencies": {
@@ -29,5 +33,8 @@
 	"type": "module",
 	"files": [
 		"dist"
-	]
+	],
+	"repository": {
+		"url": "git://github.com/lexographics/breaker.svelte"
+	}
 }
