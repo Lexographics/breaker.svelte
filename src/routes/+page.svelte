@@ -89,15 +89,19 @@
 >
     <div style="padding: 1rem;">
         <Button type="primary" value="Primary" />
+        <Button transparent type="primary" value="Primary" />
     </div>
     <div style="padding: 1rem;">
         <Button type="warning" value="Warning" />
+        <Button transparent type="warning" value="Warning" />
     </div>
     <div style="padding: 1rem;">
         <Button type="error" value="Error" />
+        <Button transparent type="error" value="Error" />
     </div>
     <div style="padding: 1rem;">
         <Button type="success" value="Success" />
+        <Button transparent type="success" value="Success" />
     </div>
 </div>
 

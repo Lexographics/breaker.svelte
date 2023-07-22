@@ -7,12 +7,15 @@
   export let type = "primary";
   export let submit = false;
   export let value = "";
+  export let transparent = false;
+
+  let transparentClass = transparent ? "transparent" : "";
 
   function _onClick(e) {
-    if(href === "//:;") {
+    if (href === "//:;") {
       e.preventDefault();
     }
-    
+
     onclick(e);
   }
 
@@ -24,8 +27,8 @@
 
       let span = document.createElement("span");
       span.classList.add("ripple");
-      span.style.left = x + 'px';
-      span.style.top = y + 'px';
+      span.style.left = x + "px";
+      span.style.top = y + "px";
       this.appendChild(span);
 
       setTimeout(() => {
@@ -37,7 +40,7 @@
 
 {#if submit}
   <input
-    class="type-{type}"
+    class="type-{type} {transparentClass}"
     type="submit"
     {value}
     bind:this={element}
@@ -45,15 +48,17 @@
     on:submit={_onClick}
   />
 {:else}
-  <a
-    class="type-{type}"
-    on:click={_onClick}
-    bind:this={element}
-    {href}
-    draggable="false"
-  >
-    {value}
-  </a>
+  <div>
+    <a
+      class="type-{type} {transparentClass}"
+      on:click={_onClick}
+      bind:this={element}
+      {href}
+      draggable="false"
+    >
+      {value}
+    </a>
+  </div>
 {/if}
 
 {#if false}
@@ -80,6 +85,10 @@
     background: linear-gradient(90deg, var(--blue-1) 0%, var(--blue-2) 100%);
   }
 
+  .transparent {
+    border: 1px solid var(--blue-2);
+  }
+
   input:hover {
     cursor: pointer;
   }
@@ -92,14 +101,28 @@
       var(--yellow-2) 100%
     );
   }
+  .type-warning.transparent {
+    border: 1px solid var(--yellow-2);
+  }
+
 
   .type-error {
     background: var(--red-1);
     background: linear-gradient(90deg, var(--red-1) 0%, var(--red-2) 100%);
   }
+  .type-error.transparent {
+    border: 1px solid var(--red-2);
+  }
 
   .type-success {
     background: var(--green-1);
     background: linear-gradient(90deg, var(--green-1) 0%, var(--green-2) 100%);
+  }
+  .type-success.transparent {
+    border: 1px solid var(--green-2);
+  }
+
+  .transparent {
+    background: transparent;
   }
 </style>
