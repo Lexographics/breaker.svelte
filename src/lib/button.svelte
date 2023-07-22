@@ -40,7 +40,7 @@
 
 {#if submit}
   <input
-    class="type-{type} {transparentClass}"
+    class="button type-{type} {transparentClass}"
     type="submit"
     {value}
     bind:this={element}
@@ -50,7 +50,7 @@
 {:else}
   <div>
     <a
-      class="type-{type} {transparentClass}"
+      class="button type-{type} {transparentClass}"
       on:click={_onClick}
       bind:this={element}
       {href}
@@ -66,8 +66,25 @@
 {/if}
 
 <style>
-  a,
-  input {
+  .button {
+    --color-1: var(--blue-1);
+    --color-2: var(--blue-2);
+  }
+  .type-warning {
+    --color-1: var(--yellow-1);
+    --color-2: var(--yellow-2);
+  }
+  .type-error {
+    --color-1: var(--red-1);
+    --color-2: var(--red-2);
+  }
+  .type-success {
+    --color-1: var(--green-1);
+    --color-2: var(--green-2);
+  }
+
+
+  .button {
     border: 0;
     width: min-content;
     position: relative;
@@ -80,49 +97,28 @@
     border-radius: 0.4rem;
     user-select: none;
     overflow: hidden;
+    transition: 0.2s;
 
-    background: var(--blue-1);
-    background: linear-gradient(90deg, var(--blue-1) 0%, var(--blue-2) 100%);
-  }
+    background: var(--color-1);
+    background: linear-gradient(90deg, var(--color-1) 0%, var(--color-2) 100%);
 
-  .transparent {
-    border: 1px solid var(--blue-2);
-  }
-
-  input:hover {
-    cursor: pointer;
+    
   }
 
-  .type-warning {
-    background: var(--yellow-1);
-    background: linear-gradient(
-      90deg,
-      var(--yellow-1) 0%,
-      var(--yellow-2) 100%
-    );
-  }
-  .type-warning.transparent {
-    border: 1px solid var(--yellow-2);
+  .button.transparent {
+    color: #000;
   }
 
-
-  .type-error {
-    background: var(--red-1);
-    background: linear-gradient(90deg, var(--red-1) 0%, var(--red-2) 100%);
+  :global([data-theme="dark"]) .button.transparent {
+    color: #fff;
   }
-  .type-error.transparent {
-    border: 1px solid var(--red-2);
-  }
-
-  .type-success {
-    background: var(--green-1);
-    background: linear-gradient(90deg, var(--green-1) 0%, var(--green-2) 100%);
-  }
-  .type-success.transparent {
-    border: 1px solid var(--green-2);
+  
+  .button:hover {
+    box-shadow:var(--color-1) 0px 3px 10px 0px, var(--color-2) 0px 0px 0px 1px;   
   }
 
   .transparent {
     background: transparent;
+    border: 1px solid var(--color-2);
   }
 </style>
