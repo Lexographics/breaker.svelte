@@ -1,17 +1,17 @@
 <script>
   export let height = "auto";
   export let radius = "0px";
+  export let padding = "1rem";
 </script>
 
 
-<div class="container" style="height: {height}; border-radius: {radius};">
+<div class="container" style="height: {height}; border-radius: {radius}; padding: {padding};">
   <slot/>
 </div>
 
 
 <style>
   .container {
-    padding: 1rem;
 
     transition: 0.2s;
     background-color: rgb(204, 204, 204);

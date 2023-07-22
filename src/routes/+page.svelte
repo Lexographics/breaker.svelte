@@ -94,34 +94,47 @@
     }
 </script>
 
+<Container height="auto" padding="0">
+    <div style="display: flex; flex-direction: row;">
+        <Button transparent value="value"/>
+    </div>
+</Container>
+
 <h1 class="header-text">breaker.svelte widgets</h1>
 <br />
 
 <h1 class="header-text">buttons</h1>
 
-<Container>
-    <div
-        style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;"
-        id="buttons"
-    >
-        <div style="padding: 1rem;">
+<div
+    style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;"
+    id="buttons"
+>
+        <div style="padding: 2rem;">
             <Button type="primary" value="Primary" />
+            <br>
             <Button transparent type="primary" value="Primary" />
         </div>
-        <div style="padding: 1rem;">
+
+        <div style="padding: 2rem;">
             <Button type="warning" value="Warning" />
+            <br>
             <Button transparent type="warning" value="Warning" />
         </div>
-        <div style="padding: 1rem;">
+
+    
+        <div style="padding: 2rem;">
             <Button type="error" value="Error" />
+            <br>
             <Button transparent type="error" value="Error" />
         </div>
-        <div style="padding: 1rem;">
+    
+        <div style="padding: 2rem;">
             <Button type="success" value="Success" />
+            <br>
             <Button transparent type="success" value="Success" />
         </div>
-    </div>
-</Container>
+    
+</div>
 
 <br />
 <h1 class="header-text">switch</h1>
@@ -141,7 +154,7 @@
                 {onChange}
                 name="name"
                 placeholder="John Doe"
-                type="tel">Username</TextInput
+                type="name">Username</TextInput
             >
             <TextInput
                 errorText={$passwordError}

@@ -48,7 +48,6 @@
     on:submit={_onClick}
   />
 {:else}
-  <div>
     <a
       class="button type-{type} {transparentClass}"
       on:click={_onClick}
@@ -58,7 +57,6 @@
     >
       {value}
     </a>
-  </div>
 {/if}
 
 {#if false}
@@ -88,9 +86,8 @@
     border: 0;
     width: min-content;
     position: relative;
-    display: inline-block;
+    display: block;
     padding: 4px 32px;
-    margin: 14px 0;
     text-decoration: none;
     font-size: 1.2rem;
     color: #fff;
@@ -101,8 +98,6 @@
 
     background: var(--color-1);
     background: linear-gradient(90deg, var(--color-1) 0%, var(--color-2) 100%);
-
-    
   }
 
   .button.transparent {
@@ -112,10 +107,10 @@
   :global([data-theme="dark"]) .button.transparent {
     color: #fff;
   }
-  
+
   .button:hover {
     cursor: pointer;
-    box-shadow:var(--color-1) 0px 3px 10px 0px, var(--color-2) 0px 0px 0px 1px;   
+    box-shadow: var(--color-1) 0px 3px 10px 0px, var(--color-2) 0px 0px 0px 1px;
   }
 
   .transparent {
