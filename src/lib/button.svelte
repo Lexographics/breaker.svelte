@@ -1,11 +1,20 @@
 <script>
   import { onMount } from "svelte";
-  import './global.css'
+  import "./global.css";
 
-  export let href = "#";
-  export let onclick = function() {}
+  export let href = "//:;";
+  export let onclick = function (e) {};
   export let type = "primary";
+  export let submit = false;
+  export let value = "";
 
+  function _onClick(e) {
+    if(href === "//:;") {
+      e.preventDefault();
+    }
+    
+    onclick(e);
+  }
 
   let element = null;
   onMount(async () => {
@@ -26,16 +35,35 @@
   });
 </script>
 
-<a class="type-{type}" on:click={onclick} bind:this={element} {href} draggable="false">
-  <slot />
-</a>
+{#if submit}
+  <input
+    class="type-{type}"
+    type="submit"
+    {value}
+    bind:this={element}
+    on:click={_onClick}
+    on:submit={_onClick}
+  />
+{:else}
+  <a
+    class="type-{type}"
+    on:click={_onClick}
+    bind:this={element}
+    {href}
+    draggable="false"
+  >
+    {value}
+  </a>
+{/if}
 
 {#if false}
   <span />
 {/if}
 
 <style>
-  a {
+  a,
+  input {
+    border: 0;
     width: min-content;
     position: relative;
     display: inline-block;
@@ -49,14 +77,14 @@
     overflow: hidden;
 
     background: var(--blue-1);
-    background: linear-gradient(
-      90deg,
-      var(--blue-1) 0%,
-      var(--blue-2) 100%
-    );
+    background: linear-gradient(90deg, var(--blue-1) 0%, var(--blue-2) 100%);
   }
 
-  a.type-warning {
+  input:hover {
+    cursor: pointer;
+  }
+
+  .type-warning {
     background: var(--yellow-1);
     background: linear-gradient(
       90deg,
@@ -65,21 +93,13 @@
     );
   }
 
-  a.type-error {
+  .type-error {
     background: var(--red-1);
-    background: linear-gradient(
-      90deg,
-      var(--red-1) 0%,
-      var(--red-2) 100%
-    );
+    background: linear-gradient(90deg, var(--red-1) 0%, var(--red-2) 100%);
   }
 
-  a.type-success {
+  .type-success {
     background: var(--green-1);
-    background: linear-gradient(
-      90deg,
-      var(--green-1) 0%,
-      var(--green-2) 100%
-    );
+    background: linear-gradient(90deg, var(--green-1) 0%, var(--green-2) 100%);
   }
 </style>
