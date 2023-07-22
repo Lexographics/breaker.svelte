@@ -114,6 +114,7 @@
   }
   
   .button:hover {
+    cursor: pointer;
     box-shadow:var(--color-1) 0px 3px 10px 0px, var(--color-2) 0px 0px 0px 1px;   
   }
 

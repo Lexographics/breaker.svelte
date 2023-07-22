@@ -36,3 +36,17 @@ export function doesntMatchRegex(regex, errorMessage) {
     return errorMessage;
   }
 }
+
+export function dumpValue(fieldName, value) {
+  console.log(fieldName + ": " + value);
+
+  return "";
+}
+
+export function isChecked(fieldName, checked) {
+  if(checked) {
+    return "";
+  }
+
+  return fieldName + " must be checked";
+}

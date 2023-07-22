@@ -1,8 +1,8 @@
 <script>
     import { writable } from "svelte/store";
     import { browser } from "$app/environment";
-    import { Button, Switch, TextInput } from "$lib/lib";
-    import { notLessThan, notEmpty, notGreaterThan, doesntMatchRegex } from "$lib/forms/lib";
+    import { Button, Switch, TextInput, CheckBox } from "$lib/lib";
+    import { notLessThan, notEmpty, notGreaterThan, doesntMatchRegex, isChecked } from "$lib/forms/lib";
 
     function toggleDarkMode(e) {
         if (e.target.checked) {
@@ -21,6 +21,7 @@
 
     let nameError = writable("");
     let passwordError = writable("");
+    let checkboxError = writable("");
 
     function check(e) {
         let fields = {
@@ -32,6 +33,10 @@
                 err: passwordError,
                 func: [notEmpty, notLessThan(8), notGreaterThan(10)],
             },
+            Check: {
+                err: checkboxError,
+                func: [isChecked]
+            }
         };
 
         let valid = true;
@@ -46,7 +51,14 @@
             }
 
             for (let func of data.func) {
-                let err = func(name, input.value);
+                let err = "";
+                if (["text", "password", "tel", "email"].includes(input.type)) {
+                    err = func(name, input.value);
+                }
+                if (["checkbox"].includes(input.type)) {
+                    err = func(name, input.checked);
+                }
+                
                 data.err.set(err);
 
                 if (err !== "") {
@@ -119,7 +131,7 @@
 <h1
     style="text-align: center; text-transform: uppercase; margin: 2rem; color: #b020c9; font-size: 3rem; font-weight: 500;"
 >
-    text input
+    forms
 </h1>
 
 <div style="width: 50%; margin-left: 25%;">
@@ -139,6 +151,8 @@
             placeholder="********"
             type="password">Password</TextInput
         >
+
+        <CheckBox errorText={$checkboxError} value="You must check this" name="check" id="check" onChange={onChange}/>
 
         <Button type="success" submit value="Submit" onclick={submit} />
     </form>
