@@ -22,6 +22,7 @@
 <style>
   .error {
     color: red;
+    height: 1rem;
   }
 
   .text-input {

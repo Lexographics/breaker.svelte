@@ -28,10 +28,11 @@
 <style>
   .error {
     color: red;
+    height: 1rem;
   }
 
   .checkbox {
-    margin: 0.5rem 0;
+    padding: 1rem 0;
   }
 
   label {
