@@ -1,7 +1,7 @@
 <script>
     import { writable } from "svelte/store";
     import { browser } from "$app/environment";
-    import { Button, Switch, TextInput, CheckBox, Container } from "$lib/lib";
+    import { Button, NavButton, Switch, TextInput, CheckBox, Container, LoadingIndicator } from "$lib/lib";
     import {
         notLessThan,
         notEmpty,
@@ -92,11 +92,25 @@
     function onChange(e) {
         check(e);
     }
+
+    let users = [];
+    let loading = false;
+    async function makeRequest() {
+        loading = true;
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/users"
+        );
+        users = await response.json();
+        loading = false;
+    }
 </script>
 
-<Container height="auto" padding="0">
-    <div style="display: flex; flex-direction: row;">
-        <Button transparent value="value"/>
+<Container height="auto" padding="0" backgroundColor="#3498DB">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center;">
+        <NavButton href="./"> Home </NavButton>
+        <NavButton href="./"> About </NavButton>
+        <NavButton href="./"> Gallery </NavButton>
+        <NavButton href="./"> Contact </NavButton>
     </div>
 </Container>
 
@@ -109,31 +123,29 @@
     style="display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap;"
     id="buttons"
 >
-        <div style="padding: 2rem;">
-            <Button type="primary" value="Primary" />
-            <br>
-            <Button transparent type="primary" value="Primary" />
-        </div>
+    <div style="padding: 2rem;">
+        <Button type="primary" value="Primary" />
+        <br />
+        <Button transparent type="primary" value="Primary" />
+    </div>
 
-        <div style="padding: 2rem;">
-            <Button type="warning" value="Warning" />
-            <br>
-            <Button transparent type="warning" value="Warning" />
-        </div>
+    <div style="padding: 2rem;">
+        <Button type="warning" value="Warning" />
+        <br />
+        <Button transparent type="warning" value="Warning" />
+    </div>
 
-    
-        <div style="padding: 2rem;">
-            <Button type="error" value="Error" />
-            <br>
-            <Button transparent type="error" value="Error" />
-        </div>
-    
-        <div style="padding: 2rem;">
-            <Button type="success" value="Success" />
-            <br>
-            <Button transparent type="success" value="Success" />
-        </div>
-    
+    <div style="padding: 2rem;">
+        <Button type="error" value="Error" />
+        <br />
+        <Button transparent type="error" value="Error" />
+    </div>
+
+    <div style="padding: 2rem;">
+        <Button type="success" value="Success" />
+        <br />
+        <Button transparent type="success" value="Success" />
+    </div>
 </div>
 
 <br />
@@ -177,6 +189,44 @@
     </Container>
 </div>
 
+<h1 class="header-text">http</h1>
+
+<div
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;"
+>
+    <Button onclick={makeRequest} value="Make Request" />
+</div>
+
+<div style="padding: 0 10%;">
+    {#if loading}
+        <div style="display: flex; justify-content: center; margin: 2rem;">
+            <LoadingIndicator/>
+        </div>
+    {:else}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Company</th>
+            </tr>
+
+            {#each users as user (user.id)}
+                <tr>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.company.name}</td>
+                </tr>
+            {/each}
+        </table>
+    {/if}
+</div>
+
 <br /><br />
 <Container height="300px" />
 
@@ -188,5 +238,21 @@
         color: #b020c9;
         font-size: 3rem;
         font-weight: 500;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
     }
 </style>
