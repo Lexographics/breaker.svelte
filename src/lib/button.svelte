@@ -8,6 +8,9 @@
   export let submit = false;
   export let value = "";
   export let transparent = false;
+  export let flat = false;
+  export let noOutline = false;
+  export let noShadow = false;
 
   let transparentClass = transparent ? "transparent" : "";
 
@@ -40,7 +43,7 @@
 
 {#if submit}
   <input
-    class="button type-{type} {transparentClass}"
+    class="button type-{type} {transparentClass} {flat ? "flat" : ""} {noOutline ? "no-outline" : ""} {noShadow ? "" : "shadow"}"
     type="submit"
     {value}
     bind:this={element}
@@ -49,7 +52,7 @@
   />
 {:else}
     <a
-      class="button type-{type} {transparentClass}"
+      class="button type-{type} {transparentClass} {flat ? "flat" : ""} {noOutline ? "no-outline" : ""} {noShadow ? "" : "shadow"}"
       on:click={_onClick}
       bind:this={element}
       {href}
@@ -84,7 +87,7 @@
 
   .button {
     border: 0;
-    width: min-content;
+    width: fit-content;
     position: relative;
     display: block;
     padding: 4px 32px;
@@ -108,7 +111,7 @@
     color: #fff;
   }
 
-  .button:hover {
+  .button.shadow:hover {
     cursor: pointer;
     box-shadow: var(--color-1) 0px 3px 10px 0px, var(--color-2) 0px 0px 0px 1px;
   }
@@ -116,5 +119,13 @@
   .transparent {
     background: transparent;
     border: 1px solid var(--color-2);
+  }
+
+  .flat {
+    border-radius: 0;
+  }
+
+  .no-outline {
+    border: 0;
   }
 </style>
